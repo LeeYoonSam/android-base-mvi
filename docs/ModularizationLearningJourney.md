@@ -65,3 +65,8 @@ Now in Android 앱에서 이러한 규칙 플러그인은 [`build-logic` 폴더]
 - 모듈은 하나의 시스템으로 작동하는 코드 모음으로 구성되어야 합니다. 
 - 책임이 명확하게 정의되어 있어야 하며 특정 도메인 지식의 경계 내에 있어야 합니다. 
 - 예를 들어 Now in Android의 [`core:network` 모듈](https://github.com/android/nowinandroid/tree/main/core/network)은 네트워크 요청, 원격 데이터 소스의 응답 처리, 다른 모듈에 데이터 공급을 담당합니다.
+
+## 모듈화 관련 레퍼런스
+- [모듈러 설계](https://ko.wikipedia.org/wiki/%EB%AA%A8%EB%93%88%EB%9F%AC_%EC%84%A4%EA%B3%84)
+- [모듈화 설계](https://brunch.co.kr/@taehyo/55)
+- [소프트웨어 공학 - 모듈화 설계](https://velog.io/@ssj01/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4-%EA%B3%B5%ED%95%99-%EB%AA%A8%EB%93%88%ED%99%94-%EC%84%A4%EA%B3%84)
