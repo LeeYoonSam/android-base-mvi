@@ -9,6 +9,7 @@
   - Navigation: 탐색: 화면 탐색 및 종속성 주입을 위한 Hilt Navigation Compose용.
   - Hilt: 종속성 주입.
 - Retrofit2 및 OkHttp3: REST API 및 페이징 네트워크 데이터를 구성합니다.
+- Coil: 안드로이드 및 컴포즈 멀티플랫폼용 이미지 로딩 라이브러리
 - Baseline Profiles: 안드로이드 런타임에서 사용할 수 있는 클래스 및 메소드 사양 목록을 APK에 포함하여 앱 성능을 개선합니다.
 
 ## 🏛️ Architecture
@@ -62,3 +63,28 @@ UI 레이어는 사용자가 상호작용할 수 있는 버튼, 메뉴, 탭과 �
 4. baselineprofile 추가
 5. spotless 적용
 6. build-logic 추가
+
+## 트러블 슈팅
+
+### build.gradle.kts 에 플러그인 선언시 오류 발생
+
+- plugins {} 블록:
+  - 역할: 현재 프로젝트(모듈)에 특정 Gradle 플러그인을 적용하는 역할을 합니다. 
+  - 동작: 플러그인을 적용하면 해당 플러그인이 정의한 기능들이 프로젝트에 추가됩니다. 이는 다음과 같은 작업들을 포함할 수 있습니다:
+    - 새로운 Task 추가: 빌드 과정에 필요한 새로운 작업(예: Android 리소스 처리, Kotlin 코드 컴파일, Proguard 실행, Hilt 코드 생성 등)을 추가합니다.
+    - 설정(Configuration) 확장: android {}, kotlinOptions {} 와 같이 프로젝트 설정을 위한 새로운 DSL(Domain Specific Language) 블록을 사용할 수 있게 해줍니다.
+    - 기본 의존성 추가: 일부 플러그인은 기본적인 라이브러리 의존성을 자동으로 추가하기도 합니다. (예: kotlin-android 플러그인은 Kotlin 표준 라이브러리를 추가할 수 있습니다.)
+    - 새로운 의존성 설정(Configuration) 정의: 의존성을 선언하는 새로운 방식(scope)을 정의합니다. 예를 들어, com.google.devtools.ksp 플러그인은 ksp 라는 설정을 추가하여 어노테이션 프로세서를 지정할 수 있게 합니다.
+  - 핵심: 빌드 프로세스 자체를 구성하고 확장하는 역할을 합니다.
+
+- dependencies {} 블록:
+  - 역할: 현재 프로젝트의 소스 코드가 컴파일되거나 실행될 때 필요한 외부 라이브러리 또는 다른 모듈과의 의존성을 선언하는 역할을 합니다.
+  - 동작: 여기에 선언된 의존성들은 Gradle이 지정된 저장소(예: Maven Central, Google Maven Repository)에서 다운로드하거나 로컬 모듈을 찾아 해당 프로젝트의 클래스패스(Classpath)에 추가합니다. 이를 통해 프로젝트의 Kotlin/Java 코드에서 해당 라이브러리의 클래스나 함수를 import 하여 사용할 수 있게 됩니다.
+  - 설정(Configuration): implementation, api, compileOnly, runtimeOnly, testImplementation, androidTestImplementation, ksp, kapt 등 다양한 설정을 사용하여 의존성이 필요한 범위(컴파일 시, 런타임 시, 테스트 시, 어노테이션 처리 시 등)를 지정합니다.
+  - 핵심: 프로젝트의 소스 코드가 직접 사용하는 라이브러리나 모듈을 지정하는 역할을 합니다.
+
+**요약**
+- `plugins {}`: 프로젝트의 빌드 방식과 기능을 정의하고 확장합니다. (예: "이 프로젝트는 Android 라이브러리로 빌드하고, Kotlin과 Hilt를 사용할 거야.")
+- `dependencies {}`: 프로젝트의 소스 코드가 사용할 라이브러리 및 모듈을 명시합니다. (예: "내 코드는 Hilt 어노테이션과 Retrofit 라이브러리가 필요해.")
+
+두 블록은 서로 긴밀하게 연관되어 있으며, 특정 플러그인을 사용하기 위해 해당 플러그인이 요구하는 라이브러리를 `dependencies {}` 에 추가해야 하는 경우가 많습니다.
