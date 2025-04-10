@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "android-base-mvi"
 include(":app")
- 
+include(":core:model")
