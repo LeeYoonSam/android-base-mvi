@@ -11,15 +11,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.ys.mvi.ui.theme.AndroidbasemviTheme
+import com.ys.core.designsystem.component.ArticlesAppBar
+import com.ys.core.designsystem.theme.ArticlesTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AndroidbasemviTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            ArticlesTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    topBar = {
+                        ArticlesAppBar()
+                    }
+                ) { innerPadding ->
                     Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
@@ -41,7 +47,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    AndroidbasemviTheme {
+    ArticlesTheme {
         Greeting("Android")
     }
 }
