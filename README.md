@@ -88,3 +88,12 @@ UI 레이어는 사용자가 상호작용할 수 있는 버튼, 메뉴, 탭과 �
 - `dependencies {}`: 프로젝트의 소스 코드가 사용할 라이브러리 및 모듈을 명시합니다. (예: "내 코드는 Hilt 어노테이션과 Retrofit 라이브러리가 필요해.")
 
 두 블록은 서로 긴밀하게 연관되어 있으며, 특정 플러그인을 사용하기 위해 해당 플러그인이 요구하는 라이브러리를 `dependencies {}` 에 추가해야 하는 경우가 많습니다.
+
+## 라이브러리 궁금증
+### org.jetbrains.kotlinx:kotlinx-coroutines-android - implementation(libs.kotlinx.coroutines.android)
+- 코루틴의 런타임 라이브러리(suspend 함수 실행, CoroutineScope 만들기, launch, async 같은 코루틴 빌더 사용, Dispatchers 같은 기본적인 디스패처 사용)
+- kotlinx-coroutines-core에 대한 전이 의존성(transitive dependency) 을 가지고 있습니다. 즉, 이 라이브러리를 추가하면 core 라이브러리도 자동으로 포함
+
+### navigation-compose / hilt-navigation-compose
+- `navigation-compose`: Compose에서 화면 이동 기능을 구현하기 위한 필수 기반 라이브러리입니다.
+- `hilt-navigation-compose`: navigation-compose 위에서 동작하며, Hilt를 사용하여 각 Composable 화면에 최적화된 생명주기를 갖는 ViewModel을 쉽게 주입받을 수 있도록 도와주는 편의성/통합 라이브러리입니다.
