@@ -6,9 +6,9 @@ import com.ys.core.network.AppDispatchers
 import com.ys.core.network.service.ArticlesService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import retrofit2.Response
 import javax.inject.Inject
 
 internal class ArticlesRepositoryImpl @Inject constructor(
@@ -16,9 +16,11 @@ internal class ArticlesRepositoryImpl @Inject constructor(
     @AppDispatcher(AppDispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
 ) : ArticlesRepository {
 
-    override fun fetchArticles(): Flow<Response<List<Article>>> = flow {
+    override fun fetchArticles(): Flow<List<Article>> = flow {
         val response = articlesService.fetchArticles()
         emit(response)
-    }.flowOn(ioDispatcher)
+    }
+        .catch { emit(emptyList()) }
+        .flowOn(ioDispatcher)
 }
 

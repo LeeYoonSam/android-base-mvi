@@ -1,6 +1,5 @@
 package com.ys.core.navigation
 
-import androidx.navigation.compose.ComposeNavigator
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

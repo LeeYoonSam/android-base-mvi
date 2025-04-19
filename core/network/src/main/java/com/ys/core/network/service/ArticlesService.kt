@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface ArticlesService {
     @GET("articles.json")
-    suspend fun fetchArticles(): Response<List<Article>>
+    suspend fun fetchArticles(): List<Article>
 }

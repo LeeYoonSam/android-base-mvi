@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 interface ArticlesRepository {
-    fun fetchArticles(): Flow<Response<List<Article>>>
+    fun fetchArticles(): Flow<List<Article>>
 }

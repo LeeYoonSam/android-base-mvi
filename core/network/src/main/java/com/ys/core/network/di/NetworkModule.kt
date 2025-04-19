@@ -1,6 +1,7 @@
 package com.ys.core.network.di
 
 import androidx.core.os.trace
+import com.ys.core.network.BuildConfig
 import com.ys.core.network.service.ArticlesService
 import dagger.Module
 import dagger.Provides

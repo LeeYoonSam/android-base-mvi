@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -43,6 +43,7 @@ dependencies {
     // kotlinx-coroutines-core에 대한 전이 의존성(transitive dependency) 을 가지고 있습니다. 즉, 이 라이브러리를 추가하면 core 라이브러리도 자동으로 포함
     implementation(libs.kotlinx.coroutines.android)
 
+    // Hilt
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

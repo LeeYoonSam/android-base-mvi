@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.ys.core.data.repository.ArticlesRepository
 import com.ys.core.model.Article
 import com.ys.core.navigation.AppComposeNavigator
-import com.ys.core.navigation.AppScreen.ArticleScreen
+import com.ys.core.navigation.AppScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,16 +18,18 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     repository: ArticlesRepository,
-    private val navigator: AppComposeNavigator<ArticleScreen>
+    private val navigator: AppComposeNavigator<AppScreen>
 ) : ViewModel() {
     @OptIn(ExperimentalCoroutinesApi::class)
     val uiState: StateFlow<HomeUiState> = repository.fetchArticles()
         .mapLatest { response ->
-            if (response.isSuccessful) {
-                HomeUiState.Success(response.body() ?: emptyList())
-            } else {
-                HomeUiState.Error(response.message())
-            }
+            HomeUiState.Success(response)
+
+//            if (response.isSuccessful) {
+//                HomeUiState.Success(response.body() ?: emptyList())
+//            } else {
+//                HomeUiState.Error(response.message())
+//            }
         }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
@@ -35,7 +37,6 @@ class HomeViewModel @Inject constructor(
         )
 
     fun navigateToDetails(article: Article) {
-        navigator.navigate(ArticleScreen(article))
     }
 }
 
